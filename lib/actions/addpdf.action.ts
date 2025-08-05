@@ -86,6 +86,7 @@ ${pdfText}
     const response = await generateText({
       model: google('gemini-2.5-flash'),
       prompt,
+      abortSignal: AbortSignal.timeout(30000), // 30 second timeout
     });
 
     const rawText = response.text.trim()
