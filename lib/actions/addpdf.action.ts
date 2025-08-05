@@ -25,9 +25,11 @@ export const uploadPDFMain = async (formData: FormData) => {
   const prompt = `
 You are Ava, an expert document intelligence assistant for real estate contracts. Your job is to deeply analyze the content of this PDF and extract structured, complete, and clean JSON data — only based on what is explicitly written in the document.
 
+CRITICAL: First, identify the EFFECTIVE DATE of the contract. This is usually found in the opening paragraphs or signature section and may be labeled as "Effective Date", "Contract Date", or "Agreement Date".
 Output exactly in the following format (valid JSON, no markdown or annotations):
 
 {
+  "effectiveDate": "YYYY-MM-DD" | "TBD",
   "accordion": [
     { "question": "string", "answer": "string", "page": number }
   ],
@@ -68,7 +70,9 @@ Output exactly in the following format (valid JSON, no markdown or annotations):
 }
 
 Guidelines:
+- FIRST PRIORITY: Find and extract the effective date of the contract
 - Include deadlines like offer acceptance, inspection period, closing, financing contingency, etc.
+- Calculate all other dates relative to the effective date when possible
 - If a date is missing, shown as blank, or says “{Insert Date}” or similar — use "TBD" as its value.
 - Do not skip timeline or deadline entries if a date is missing.
 - Prefer precise language from the document. Do not paraphrase legal terms.

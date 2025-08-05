@@ -10,15 +10,14 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Upload, X, FileText, Trash2, Loader2 } from 'lucide-react';
-import { uploadPDFMain } from '@/lib/actions/addpdf.action';
+import PDFScanningModal from '../pdf-scanning/PDFScanningModal';
 
 const TransactionModalComponent = () => {
   const [selectedSide, setSelectedSide] = useState('Both');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [fileMeta, setFileMeta] = useState<{ name: string; size: string } | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<any>(null);
+  const [showScanningModal, setShowScanningModal] = useState(false);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -38,28 +37,25 @@ const TransactionModalComponent = () => {
 
   const handleStartIntake = async () => {
     if (!uploadedFile) return;
+    setIsOpen(false);
+    setShowScanningModal(true);
+  };
 
-    setLoading(true);
-    setResult(null);
-
-    try {
-      const formData = new FormData();
-      formData.append('pdf', uploadedFile);
-
-      const res = await uploadPDFMain(formData);
-      setResult(res.structuredData);
-      console.log('Success:', res.structuredData);
-    } catch (err) {
-      console.error('Upload failed:', err);
-      alert('Error processing the PDF');
-    } finally {
-      setLoading(false);
-      setIsOpen(false);
-    }
+  const handleScanningComplete = (data: any) => {
+    console.log('Scanning completed:', data);
+    setShowScanningModal(false);
+    // Navigate to transaction dashboard or update app state
   };
 
   return (
     <div>
+      <PDFScanningModal
+        isOpen={showScanningModal}
+        onClose={() => setShowScanningModal(false)}
+        uploadedFile={uploadedFile}
+        onComplete={handleScanningComplete}
+      />
+
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
@@ -157,17 +153,15 @@ const TransactionModalComponent = () => {
             {/* Start Button */}
             <Button
               onClick={handleStartIntake}
-              disabled={!uploadedFile || loading}
+              disabled={!uploadedFile}
               className="float-end bg-blue-600 text-white hover:bg-blue-700 py-3 text-base font-medium rounded-lg flex items-center gap-2"
             >
-              {loading && <Loader2 className="w-4 h-4 animate-spin" />}
-              {loading ? 'Processing...' : 'Start Intake'}
+              Start Intake
             </Button>
           </div>
         </DialogContent>
       </Dialog>
 
-     
     </div>
   );
 };
