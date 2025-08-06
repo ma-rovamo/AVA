@@ -64,7 +64,7 @@ export const AnalysisResults: React.FC<AnalysisResultsProps> = ({
         {/* Document Tables */}
         {result.tables && result.tables.length > 0 && (
           <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="px-6 py-4 border-b border-gray-200 bg-teal-600">
+            <div className="px-6 py-4 border-b border-gray-200 bg-blue-600">
               <h2 className="text-lg font-semibold text-white flex items-center gap-3">
              
               Property Details
@@ -112,7 +112,7 @@ export const AnalysisResults: React.FC<AnalysisResultsProps> = ({
         {/* Financing History Table */}
         {result.financingHistory && (
           <div className="bg-white rounded-lg shadow-sm border border-gray-200">
-            <div className="px-6 py-4 border-b border-gray-200 bg-teal-600">
+            <div className="px-6 py-4 border-b border-gray-200 bg-blue-600">
               <h2 className="text-lg font-semibold text-white flex items-center gap-3">
                 <DollarSign className="w-5 h-5" />
                 Financing History
@@ -148,7 +148,7 @@ export const AnalysisResults: React.FC<AnalysisResultsProps> = ({
           <div className="bg-white rounded-lg shadow-sm border border-gray-200">
             <div className="px-6 py-4 border-b border-gray-200">
               <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-3">
-                <FileText className="w-5 h-5 text-teal-600" />
+                <FileText className="w-5 h-5 text-blue-600" />
                 Terms & Conditions
               </h3>
             </div>
