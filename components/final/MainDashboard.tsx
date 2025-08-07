@@ -14,6 +14,7 @@ import {
 	FilterIcon,
 } from "lucide-react";
 import DashboardStats from "../DashboardStacs";
+import Checksome from "./ChecksomeOnce";
 
 interface Task {
 	id: string;
@@ -206,8 +207,7 @@ export default function MainDashboard() {
 				{/* Stats Cards */}
 
 				{/* Main Content Grid */}
-				<div className="grid grid-cols-2 gap-6 mb-8">
-					{/* My Tasks */}
+				{/* <div className="grid grid-cols-2 gap-6 mb-8">
 					<Card className="bg-white border border-gray-200 shadow-sm">
 						<CardHeader className="pb-4">
 							<div className="flex items-center justify-between">
@@ -275,7 +275,6 @@ export default function MainDashboard() {
 						</CardContent>
 					</Card>
 
-					{/* My Deadlines */}
 					<Card className="bg-white border border-gray-200 shadow-sm">
 						<CardHeader className="pb-4">
 							<div className="flex items-center justify-between">
@@ -336,7 +335,8 @@ export default function MainDashboard() {
 							</Tabs>
 						</CardContent>
 					</Card>
-				</div>
+				</div> */}
+				<Checksome/>
 
 				{/* Upcoming Closings */}
 				<div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
