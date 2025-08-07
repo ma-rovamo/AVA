@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 'use client';
 
 import React, { useState } from 'react';
@@ -13,44 +12,35 @@ import {
 import { Button } from '@/components/ui/button';
 import { Upload, X, FileText, Trash2, Loader2 } from 'lucide-react';
 import PDFScanningModal from '../pdf-scanning/PDFScanningModal';
-=======
-=======
->>>>>>> b0c93414b31cb0da6d36e3c2219271cf87c0d7fe
+
+
 import { uploadPDFMain } from "@/lib/actions/addpdf.action";
 import { FileMeta } from "@/types";
-import { useState } from "react";
 import { OnboardingLayout } from "../loading/onboarding";
 import PropertyProcessingLoader from "../loading/loading";
 import { AnalysisResults } from "../loading/analized";
-import { Button } from "../ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
-import { Loader2, X } from "lucide-react";
 import { SideSelection } from "../loading/side-section";
 import { UploadArea } from "../loading/uploadarea";
 import { OnboardingSteps } from "../loading/onstep";
-<<<<<<< HEAD
->>>>>>> 49691b8 (main)
-=======
->>>>>>> b0c93414b31cb0da6d36e3c2219271cf87c0d7fe
+
+
 
 const TransactionModalComponent = () => {
   const [selectedSide, setSelectedSide] = useState('Both');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [fileMeta, setFileMeta] = useState<FileMeta | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-<<<<<<< HEAD
+
   const [showScanningModal, setShowScanningModal] = useState(false);
-=======
+
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [expandedAccordion, setExpandedAccordion] = useState('accordion');
-<<<<<<< HEAD
->>>>>>> 49691b8 (main)
-=======
->>>>>>> b0c93414b31cb0da6d36e3c2219271cf87c0d7fe
+
+
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -79,19 +69,16 @@ const TransactionModalComponent = () => {
 
   const handleStartIntake = async () => {
     if (!uploadedFile) return;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     setIsOpen(false);
     setShowScanningModal(true);
   };
 
-  const handleScanningComplete = (data: any) => {
+  const handleScanningComplete = async (data: any) => {
     console.log('Scanning completed:', data);
     setShowScanningModal(false);
     // Navigate to transaction dashboard or update app state
-=======
-=======
->>>>>>> b0c93414b31cb0da6d36e3c2219271cf87c0d7fe
+
     
     setLoading(true);
     setShowOnboarding(true);
@@ -99,7 +86,6 @@ const TransactionModalComponent = () => {
 
     try {
       const formData = new FormData();
-      formData.append('pdf', uploadedFile);
       const res = await uploadPDFMain(formData);
       
       if (res.success) {
@@ -112,7 +98,6 @@ const TransactionModalComponent = () => {
     } finally {
       setLoading(false);
     }
->>>>>>> 49691b8 (main)
   };
 
   const toggleAccordion = (section: string) => {
@@ -216,31 +201,22 @@ You can make any edits before we finalize your life.
             {/* Start Button */}
             <Button
               onClick={handleStartIntake}
-<<<<<<< HEAD
-<<<<<<< HEAD
+
               disabled={!uploadedFile}
               className="float-end bg-blue-600 text-white hover:bg-blue-700 py-3 text-base font-medium rounded-lg flex items-center gap-2"
-=======
+              // @ts-ignore
               disabled={!uploadedFile || loading}
               className="float-end bg-blue-600 text-white cursor-pointer hover:bg-blue-700 py-3 text-base font-medium rounded-lg flex items-center gap-2"
->>>>>>> 49691b8 (main)
-=======
               disabled={!uploadedFile || loading}
               className="float-end bg-blue-600 text-white cursor-pointer hover:bg-blue-700 py-3 text-base font-medium rounded-lg flex items-center gap-2"
->>>>>>> b0c93414b31cb0da6d36e3c2219271cf87c0d7fe
             >
               Start Intake
             </Button>
           </div>
         </DialogContent>
       </Dialog>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> 49691b8 (main)
-=======
->>>>>>> b0c93414b31cb0da6d36e3c2219271cf87c0d7fe
+
     </div>
   );
 };
